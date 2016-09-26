@@ -1,8 +1,10 @@
 package com.tdd.example.addition;
 
+import com.tdd.example.addition.exception.NegativesNotAllowed;
+
 public class Calculator {
 
-	public int add(String numbers) {
+	public int add(String numbers) throws NegativesNotAllowed {
 		int sum = 0;
 		if (numbers.equals("")) {
 			return sum;
@@ -17,12 +19,16 @@ public class Calculator {
 		return add(numbersToBeAdded, delimiter);
 	}
 
-	private int add(String numbers, String delimiter) {
+	private int add(String numbers, String delimiter) throws NegativesNotAllowed {
 
 		int sum = 0;
 		String[] split = numbers.split(delimiter);
-		for (String number : split) {
-			sum += Integer.valueOf(number);
+		for (String numberString : split) {
+			int number = Integer.valueOf(numberString.trim());
+			if(number< 0){
+				throw new NegativesNotAllowed("Negatives not allowed : ["+number+"]");
+			}
+			sum += number;
 		}
 		return sum;
 	}
