@@ -7,8 +7,8 @@ import org.junit.Test;
 public class CalculateTest {
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void canCreateCalculator	() {
+		Calculator calculator = new Calculator();
 	}
 
 }
