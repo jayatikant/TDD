@@ -27,4 +27,19 @@ public class CalculateTest {
 	public void returnSumForTwoCommaSeparatedNumbers(){
 		assertEquals(5, calculator.add("1,4"));
 	}
+	
+	@Test
+	public void returnSumForThreeCommaSeparatedNumbers(){
+		assertEquals(6, calculator.add("1,4,1"));
+	}
+	
+	@Test
+	public void returnSumOfTwoNewLineSeparatedNumbers(){
+		assertEquals(5, calculator.add("1\n4"));
+	}
+	
+	@Test
+	public void returnsSumOfThreeMixedDelimiterNumbers(){
+		assertEquals(6, calculator.add("1\n2,3"));
+	}
 }
