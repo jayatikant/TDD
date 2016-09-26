@@ -10,19 +10,21 @@ public class CalculateTest {
 
 	@Test
 	public void canCreateAddMethod(){
-		int sum = calculator.add("1");
-		assertEquals(1, sum);
+		assertEquals(1, calculator.add("1"));
 	}
 
 	@Test
 	public void returnZeroForEmptyString(){
-		int sum = calculator.add("");
-		assertEquals(0, sum);
+		assertEquals(0, calculator.add(""));
 	}
 	
 	@Test
 	public void returnSumForASingleNumber(){
-		int sum = calculator.add("3");
-		assertEquals(3, sum);
+		assertEquals(3, calculator.add("3"));
+	}
+	
+	@Test
+	public void returnSumForTwoCommaSeparatedNumbers(){
+		assertEquals(5, calculator.add("1,4"));
 	}
 }
