@@ -10,5 +10,12 @@ public class CalculateTest {
 	public void canCreateCalculator	() {
 		Calculator calculator = new Calculator();
 	}
+	
+	@Test
+	public void canCreateAddMethod(){
+		Calculator calculator = new Calculator();
+		int sum = calculator.add("1");
+		assertEquals(1, sum);
+	}
 
 }
