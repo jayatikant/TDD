@@ -61,7 +61,17 @@ public class CalculateTest {
 			calculator.add("1, -2");
 			fail("Failed to process negative numbers");
 		} catch (NegativesNotAllowed e) {
-			assertEquals(e.getMessage(), "Negatives not allowed : [-2]");
+			assertEquals( "Negatives not allowed : [-2]", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void multipleNeagtiveNumbersAppearInExceptionMessage(){
+		try {
+			calculator.add("1, -2, -3");
+			fail("Failed to process negative numbers");
+		} catch (NegativesNotAllowed e) {
+			assertEquals( "Negatives not allowed : [-2, -3]", e.getMessage());
 		}
 	}
 }
