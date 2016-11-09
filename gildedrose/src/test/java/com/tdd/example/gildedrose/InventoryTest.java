@@ -7,8 +7,6 @@ import org.junit.Test;
 
 public class InventoryTest {
 
-	
-
 	@Test
 	public void sellByDateAndQualityAreLowered() {
 		Item[] items = new Item[] { new Item("foo", 3, 50) };
@@ -122,12 +120,10 @@ public class InventoryTest {
 		assertEquals(-1, inventory.items[0].sellBy);
 		assertEquals(0, inventory.items[0].quality);
 	}
-	
 
 	@Test
-	public void agedBrieIncreasesInQualityAfterSellByDate(){
-		Item[] items = new Item[] { new Item(
-				"Aged Brie", -1 , 10) };
+	public void agedBrieIncreasesInQualityAfterSellByDate() {
+		Item[] items = new Item[] { new Item("Aged Brie", -1, 10) };
 		Inventory inventory = new Inventory(items);
 		inventory.updateStock();
 		assertEquals(-2, inventory.items[0].sellBy);
