@@ -55,14 +55,6 @@ public class InventoryTest {
 		assertEquals(2, inventory.items[0].quality);
 	}
 
-	// @Test
-	// public void qualityIsNeverMoreThan50(){
-	// Item[] items = new Item[] {new Item ("foo", 1, 55)};
-	// Inventory inventory = new Inventory(items);
-	// Inventory.updateQuality();
-	// assertEquals(0, inventory.items[0].sellBy);
-	// assertEquals(54, inventory.items[0].quality);
-	// }
 
 	@Test
 	public void sulfurasDoesntSellOrDescreaseInQuality() {
@@ -128,5 +120,53 @@ public class InventoryTest {
 		inventory.updateStock();
 		assertEquals(-2, inventory.items[0].sellBy);
 		assertEquals(12, inventory.items[0].quality);
+	}
+
+	@Test
+	public void qualityUnchagedForAgedBrieAfterMaxReached() {
+		Item[] items = new Item[] { new Item("Aged Brie", 5, 50) };
+		Inventory inventory = new Inventory(items);
+		inventory.updateStock();
+		assertEquals(4, inventory.items[0].sellBy);
+		assertEquals(50, inventory.items[0].quality);
+	}
+
+	@Test
+	public void qualityIncreasesForAgedBrieAfterSellByDate() {
+		Item[] items = new Item[] { new Item("Aged Brie", -1, 40) };
+		Inventory inventory = new Inventory(items);
+		inventory.updateStock();
+		assertEquals(-2, inventory.items[0].sellBy);
+		assertEquals(42, inventory.items[0].quality);
+	}
+	
+	@Test
+	public void qualityUnchangedForAgedBrieAfterSellByDateAndMaxReached() {
+		Item[] items = new Item[] { new Item("Aged Brie", -1, 50) };
+		Inventory inventory = new Inventory(items);
+		inventory.updateStock();
+		assertEquals(-2, inventory.items[0].sellBy);
+		assertEquals(50, inventory.items[0].quality);
+	}
+
+	@Test
+	public void qualityUnchagedForBackstagePassesAfterMaxReached() {
+		Item[] items = new Item[] { new Item(
+				"Backstage passes to a TAFKAL80ETC concert", 5, 50) };
+		Inventory inventory = new Inventory(items);
+		inventory.updateStock();
+		assertEquals(4, inventory.items[0].sellBy);
+		assertEquals(50, inventory.items[0].quality);
+	}
+
+	
+	@Test
+	public void qualityUnchangedForSulfurasAfterSellByDate() {
+		Item[] items = new Item[] { new Item(
+				"Sulfuras, Hand of Ragnaros", -1, 50) };
+		Inventory inventory = new Inventory(items);
+		inventory.updateStock();
+		assertEquals(-1, inventory.items[0].sellBy);
+		assertEquals(50, inventory.items[0].quality);
 	}
 }
