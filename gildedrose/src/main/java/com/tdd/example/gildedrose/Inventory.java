@@ -43,9 +43,7 @@ class Inventory {
 		if (!item.name.equals(AGED_BRIE)) {
 		    updateIfNotAgedBrie(item);
 		} else {
-		    if (item.quality < 50) {
-		        item.quality = item.quality + 1;
-		    }
+		    incrementQualityIfNotMax(item);
 		}
 	}
 
@@ -70,18 +68,24 @@ class Inventory {
 		    item.quality = item.quality + 1;
 
 		    if (BACKSTAGE_PASSES.equals(item.name)) {
-		        if (item.sellBy < 11) {
-		            if (item.quality < 50) {
-		                item.quality = item.quality + 1;
-		            }
-		        }
-
-		        if (item.sellBy < 6) {
-		            if (item.quality < 50) {
-		                item.quality = item.quality + 1;
-		            }
-		        }
+		        updateIfBackStagePasses(item);
 		    }
+		}
+	}
+
+	private void updateIfBackStagePasses(Item item) {
+		if (item.sellBy < 11) {
+		    incrementQualityIfNotMax(item);
+		}
+
+		if (item.sellBy < 6) {
+		    incrementQualityIfNotMax(item);
+		}
+	}
+
+	private void incrementQualityIfNotMax(Item item) {
+		if (item.quality < 50) {
+		    item.quality = item.quality + 1;
 		}
 	}
 }
