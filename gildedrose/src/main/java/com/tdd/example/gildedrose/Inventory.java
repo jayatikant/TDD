@@ -10,28 +10,29 @@ class Inventory {
 
     public void updateStock() {
         for (int i = 0; i < items.length; i++) {
-            updateItem(i);
+            updateItem(items[i]);
         }
     }
 
-	private void updateItem(int i) {
-		if (!items[i].name.equals("Aged Brie")
-		        && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-		    if (items[i].quality > 0) {
-		        if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-		            items[i].quality = items[i].quality - 1;
+	private void updateItem(Item item) {
+		
+		if (!"Aged Brie".equals(item.name)
+		        && !"Backstage passes to a TAFKAL80ETC concert".equals(item.name)) {
+		    if (item.quality > 0) {
+		        if (!"Sulfuras, Hand of Ragnaros".equals(item.name)) {
+		            item.quality = item.quality - 1;
 		        }
 		    }
 		} else {
-		    updateIfNotAgedBrieAndBackstagePasses(i);
+		    updateIfNotAgedBrieAndBackstagePasses(item);
 		}
 
-		if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-		    items[i].sellBy = items[i].sellBy - 1;
+		if (!"Sulfuras, Hand of Ragnaros".equals(item.name)) {
+		    item.sellBy = item.sellBy - 1;
 		}
 
-		if (items[i].sellBy < 0) {
-		    updateIfExpired(items[i]);
+		if (item.sellBy < 0) {
+		    updateIfExpired(item);
 		}
 	}
 
@@ -53,20 +54,20 @@ class Inventory {
 		}
 	}
 
-	private void updateIfNotAgedBrieAndBackstagePasses(int i) {
-		if (items[i].quality < 50) {
-		    items[i].quality = items[i].quality + 1;
+	private void updateIfNotAgedBrieAndBackstagePasses(Item item) {
+		if (item.quality < 50) {
+		    item.quality = item.quality + 1;
 
-		    if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-		        if (items[i].sellBy < 11) {
-		            if (items[i].quality < 50) {
-		                items[i].quality = items[i].quality + 1;
+		    if ("Backstage passes to a TAFKAL80ETC concert".equals(item.name)) {
+		        if (item.sellBy < 11) {
+		            if (item.quality < 50) {
+		                item.quality = item.quality + 1;
 		            }
 		        }
 
-		        if (items[i].sellBy < 6) {
-		            if (items[i].quality < 50) {
-		                items[i].quality = items[i].quality + 1;
+		        if (item.sellBy < 6) {
+		            if (item.quality < 50) {
+		                item.quality = item.quality + 1;
 		            }
 		        }
 		    }
