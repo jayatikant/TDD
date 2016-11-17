@@ -41,18 +41,26 @@ class Inventory {
 
 	private void updateIfExpired(Item item) {
 		if (!item.name.equals(AGED_BRIE)) {
-		    if (!BACKSTAGE_PASSES.equals(item.name)) {
-		        if (item.quality > 0) {
-		            if (!item.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
-		                item.quality = item.quality - 1;
-		            }
-		        }
-		    } else {
-		        item.quality = item.quality - item.quality;
-		    }
+		    updateIfNotAgedBrie(item);
 		} else {
 		    if (item.quality < 50) {
 		        item.quality = item.quality + 1;
+		    }
+		}
+	}
+
+	private void updateIfNotAgedBrie(Item item) {
+		if (!BACKSTAGE_PASSES.equals(item.name)) {
+		    updateIfNotBackStagePasses(item);
+		} else {
+		    item.quality = item.quality - item.quality;
+		}
+	}
+
+	private void updateIfNotBackStagePasses(Item item) {
+		if (item.quality > 0) {
+		    if (!item.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
+		        item.quality = item.quality - 1;
 		    }
 		}
 	}
