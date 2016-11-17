@@ -2,7 +2,10 @@ package com.tdd.example.gildedrose;
 
 
 class Inventory {
-    Item[] items;
+    private static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
+	private static final String AGED_BRIE = "Aged Brie";
+	private static final String SULFURAS_HAND_OF_RAGNAROS = "Sulfuras, Hand of Ragnaros";
+	Item[] items;
 
     public Inventory(Item[] items) {
         this.items = items;
@@ -16,10 +19,10 @@ class Inventory {
 
 	private void updateItem(Item item) {
 		
-		if (!"Aged Brie".equals(item.name)
-		        && !"Backstage passes to a TAFKAL80ETC concert".equals(item.name)) {
+		if (!AGED_BRIE.equals(item.name)
+		        && !BACKSTAGE_PASSES.equals(item.name)) {
 		    if (item.quality > 0) {
-		        if (!"Sulfuras, Hand of Ragnaros".equals(item.name)) {
+		        if (!SULFURAS_HAND_OF_RAGNAROS.equals(item.name)) {
 		            item.quality = item.quality - 1;
 		        }
 		    }
@@ -27,7 +30,7 @@ class Inventory {
 		    updateIfNotAgedBrieAndBackstagePasses(item);
 		}
 
-		if (!"Sulfuras, Hand of Ragnaros".equals(item.name)) {
+		if (!SULFURAS_HAND_OF_RAGNAROS.equals(item.name)) {
 		    item.sellBy = item.sellBy - 1;
 		}
 
@@ -37,10 +40,10 @@ class Inventory {
 	}
 
 	private void updateIfExpired(Item item) {
-		if (!item.name.equals("Aged Brie")) {
-		    if (!item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+		if (!item.name.equals(AGED_BRIE)) {
+		    if (!BACKSTAGE_PASSES.equals(item.name)) {
 		        if (item.quality > 0) {
-		            if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
+		            if (!item.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
 		                item.quality = item.quality - 1;
 		            }
 		        }
@@ -58,7 +61,7 @@ class Inventory {
 		if (item.quality < 50) {
 		    item.quality = item.quality + 1;
 
-		    if ("Backstage passes to a TAFKAL80ETC concert".equals(item.name)) {
+		    if (BACKSTAGE_PASSES.equals(item.name)) {
 		        if (item.sellBy < 11) {
 		            if (item.quality < 50) {
 		                item.quality = item.quality + 1;
