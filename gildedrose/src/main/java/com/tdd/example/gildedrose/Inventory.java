@@ -21,13 +21,9 @@ class Inventory {
 		
 		if (!AGED_BRIE.equals(item.name)
 		        && !BACKSTAGE_PASSES.equals(item.name)) {
-		    if (item.quality > 0) {
-		        if (!SULFURAS_HAND_OF_RAGNAROS.equals(item.name)) {
-		            item.quality = item.quality - 1;
-		        }
-		    }
-		} else {
 		    updateIfNotAgedBrieAndBackstagePasses(item);
+		} else {
+		    updateIfAgedBrieAndBackstagePasses(item);
 		}
 
 		if (!SULFURAS_HAND_OF_RAGNAROS.equals(item.name)) {
@@ -36,6 +32,14 @@ class Inventory {
 
 		if (item.sellBy < 0) {
 		    updateIfExpired(item);
+		}
+	}
+
+	private void updateIfNotAgedBrieAndBackstagePasses(Item item) {
+		if (item.quality > 0) {
+		    if (!SULFURAS_HAND_OF_RAGNAROS.equals(item.name)) {
+		        item.quality = item.quality - 1;
+		    }
 		}
 	}
 
@@ -63,7 +67,7 @@ class Inventory {
 		}
 	}
 
-	private void updateIfNotAgedBrieAndBackstagePasses(Item item) {
+	private void updateIfAgedBrieAndBackstagePasses(Item item) {
 		if (item.quality < 50) {
 		    item.quality = item.quality + 1;
 
