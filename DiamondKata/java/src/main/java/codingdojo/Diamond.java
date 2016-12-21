@@ -18,12 +18,15 @@ public class Diamond {
     public static String print(char middleLetter) {
         Diamond diamond = new Diamond(middleLetter);
         StringBuffer result = new StringBuffer();
-        for (List<Character> chars : diamond.getRows()) {
+        if(middleLetter != 'A')
+        	result.append(middleLetter).append((char)(Character.getNumericValue(middleLetter)-1));
+        result.append(middleLetter);
+        /*for (List<Character> chars : diamond.getRows()) {
             for (Character c: chars) {
                 result.append(c);
             }
             result.append("\n");
-        }
+        }*/
         return result.toString();
     }
 
@@ -31,7 +34,7 @@ public class Diamond {
 
     public static void main(String[] args) {
         if (args.length == 1) {
-            System.out.println(Diamond.print(args[0].charAt(0)));
+            System.out.println("urfuu"+Diamond.print(args[0].charAt(0)));
         } else {
             System.out.println("please supply one argument: the char of the diamond middle");
         }
